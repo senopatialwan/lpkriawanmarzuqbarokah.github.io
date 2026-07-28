@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kursus Menjahit - Riawan Marzuq Barokah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.0.8/index.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#f5c518',
+                        accent: '#2d5a8e',
+                        dark: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.15) 1px, transparent 0);
+            background-size: 30px 30px;
+        }
+        .dot-pattern {
+            background-image: radial-gradient(circle, #f5c518 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-anim { animation: float 3s ease-in-out infinite; }
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(245,197,24,0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(245,197,24,0); }
+        }
+        .pulse-gold { animation: pulse-gold 2s infinite; }
+        .gradient-text {
+            background: linear-gradient(135deg, #f5c518, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #f5c518, #1e3a5f);
+        }
+        @media (min-width: 768px) {
+            .timeline-line::before { left: 50%; transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 flex items-center justify-center">
+                        <img src="img/logo-lpk.png" alt="Logo LPK Riawan Marzuq Barokah" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <div class="font-bold text-white text-sm md:text-base">Riawan Marzuq</div>
+                        <div class="text-secondary text-xs">Barokah</div>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#beranda" class="text-white hover:text-secondary transition-colors text-sm font-medium">Beranda</a>
+                    <a href="#tentang" class="text-white hover:text-secondary transition-colors text-sm font-medium">Tentang</a>
+                    <a href="#keunggulan" class="text-white hover:text-secondary transition-colors text-sm font-medium">Keunggulan</a>
+                    <a href="#materi" class="text-white hover:text-secondary transition-colors text-sm font-medium">Materi</a>
+                    <a href="#biaya" class="text-white hover:text-secondary transition-colors text-sm font-medium">Biaya</a>
+                    <a href="#kontak" class="bg-secondary text-primary px-5 py-2 rounded-full font-semibold text-sm hover:bg-yellow-400 transition-all">Daftar</a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-primary/95 nav-blur border-t border-white/10">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#beranda" class="block text-white hover:text-secondary py-2">Beranda</a>
+                <a href="#tentang" class="block text-white hover:text-secondary py-2">Tentang</a>
+                <a href="#keunggulan" class="block text-white hover:text-secondary py-2">Keunggulan</a>
+                <a href="#materi" class="block text-white hover:text-secondary py-2">Materi</a>
+                <a href="#biaya" class="block text-white hover:text-secondary py-2">Biaya</a>
+                <a href="#kontak" class="block bg-secondary text-primary px-5 py-2 rounded-full font-semibold text-center">Daftar Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative min-h-screen bg-primary overflow-hidden">
+        <div class="absolute inset-0 hero-pattern"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-secondary/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-accent/20 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
+        
+        <!-- Decorative dots -->
+        <div class="absolute top-20 right-10 w-32 h-32 dot-pattern opacity-30"></div>
+        <div class="absolute bottom-20 left-10 w-24 h-24 dot-pattern opacity-20"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-36 md:pb-24">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="text-white space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2">
+                        <span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+                        <span class="text-sm text-secondary font-medium">Pendaftaran Dibuka</span>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                        Kursus<br>
+                        <span class="gradient-text">Menjahit</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-lg">
+                        Lembaga Pelatihan Kerja Kejuruan Menjahit — <span class="text-secondary font-semibold">Riawan Marzuq Barokah</span>. Desain mode tata busana profesional untuk masa depan cerah.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#biaya" class="bg-secondary text-primary px-8 py-4 rounded-full font-bold hover:bg-yellow-400 transition-all transform hover:scale-105 shadow-lg shadow-secondary/30">
+                            Daftar Sekarang
+                        </a>
+                        <a href="#tentang" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all">
+                            Pelajari Lebih Lanjut
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-8 pt-6">
+                        <div>
+                            <div class="text-3xl font-bold text-secondary">500+</div>
+                            <div class="text-sm text-gray-400">Alumni</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/20"></div>
+                        <div>
+                            <div class="text-3xl font-bold text-secondary">100%</div>
+                            <div class="text-sm text-gray-400">Bersertifikat</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/20"></div>
+                        <div>
+                            <div class="text-3xl font-bold text-secondary">Siap</div>
+                            <div class="text-sm text-gray-400">Kerja</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl float-anim">
+                        <img src="img/foto-1.png" alt="Kelas Menjahit" class="w-full h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+                    </div>
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-primary">Dapat Sertifikat</div>
+                                <div class="text-xs text-gray-500">Resmi & Diakui</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Floating badge 2 -->
+                    <div class="absolute -top-4 -right-4 bg-secondary text-primary rounded-2xl p-4 shadow-xl">
+                        <div class="text-center">
+                            <div class="text-xs font-medium">Mulai dari</div>
+                            <div class="text-2xl font-bold">Rp 700rb</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wave separator -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="tentang" class="py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative fade-in">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="https://image.qwenlm.ai/public_source/fa6da749-83e6-4f21-94de-91d06ceaaf45/1e40b006c-31f5-4a72-b768-5c3ed9bf2eb9.png" alt="Menjahit" class="rounded-2xl shadow-lg w-full h-64 object-cover">
+                        <img src="https://image.qwenlm.ai/public_source/fa6da749-83e6-4f21-94de-91d06ceaaf45/1c62987ce-33e4-4bf5-8d69-6d2d0cf52cc1.png" alt="Desain Busana" class="rounded-2xl shadow-lg w-full h-64 object-cover mt-8">
+                    </div>
+                    <div class="absolute -z-10 top-8 -left-8 w-full h-full bg-secondary/20 rounded-2xl"></div>
+                </div>
+                <div class="fade-in space-y-6">
+                    <div class="inline-block bg-secondary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold">TENTANG KAMI</div>
+                    <h2 class="text-3xl md:text-5xl font-bold text-primary leading-tight">
+                        Lembaga Pelatihan Kerja <span class="text-secondary">Kejuruan Menjahit</span>
+                    </h2>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        <strong class="text-primary">Riawan Marzuq Barokah</strong> adalah lembaga pelatihan kerja yang bergerak di bidang kejuruan menjahit dan desain mode tata busana. Kami berkomitmen menghasilkan lulusan yang siap kerja dengan keterampilan menjahit profesional.
+                    </p>
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Pengajar Berpengalaman</h4>
+                                <p class="text-gray-600 text-sm">Instruktur profesional dengan pengalaman di industri fashion</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Fasilitas Lengkap</h4>
+                                <p class="text-gray-600 text-sm">Mesin jahit modern dan ruang belajar yang nyaman</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-secondary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Kurikulum Terstruktur</h4>
+                                <p class="text-gray-600 text-sm">Materi dari dasar hingga mahir dengan project nyata</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keunggulan Section -->
+    <section id="keunggulan" class="py-20 md:py-28 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-secondary/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 bg-primary/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <div class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">KEUNGGULAN KAMI</div>
+                <h2 class="text-3xl md:text-5xl font-bold text-primary">Mengapa Memilih <span class="text-secondary">Kami?</span></h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Kami memberikan pengalaman belajar menjahit terbaik dengan berbagai keunggulan yang tidak akan Anda temukan di tempat lain.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 fade-in">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-yellow-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-secondary/30">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Bersertifikat</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Mendapatkan sertifikat pelatihan resmi yang diakui dan dapat meningkatkan nilai profesional Anda.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 fade-in" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-yellow-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-secondary/30">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Biaya Terjangkau</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Investasi pendidikan terbaik dengan biaya yang ramah di kantong, mulai dari Rp 700.000 saja.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 fade-in" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-yellow-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-secondary/30">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Waktu Fleksibel</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Jadwal belajar yang dapat disesuaikan dengan kesibukan Anda, 1-2x pertemuan per minggu.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-100 fade-in" style="transition-delay: 300ms;">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary to-yellow-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-secondary/30">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Lulusan Siap Kerja</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Kurikulum dirancang agar lulusan memiliki skill yang langsung dibutuhkan industri fashion.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materi Section -->
+    <section id="materi" class="py-20 md:py-28 bg-primary relative overflow-hidden">
+        <div class="absolute inset-0 hero-pattern opacity-20"></div>
+        <div class="absolute top-20 left-20 w-64 h-64 bg-secondary/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-64 h-64 bg-accent/20 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <div class="inline-block bg-secondary/20 text-secondary px-4 py-2 rounded-full text-sm font-semibold mb-4">MATERI REGULAR</div>
+                <h2 class="text-3xl md:text-5xl font-bold text-white">Kurikulum <span class="gradient-text">Lengkap</span></h2>
+                <p class="text-gray-300 mt-4 max-w-2xl mx-auto">Materi pembelajaran terstruktur dari dasar hingga mahir, mencakup seluruh proses pembuatan busana profesional.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Materi 1 -->
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group fade-in">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary/30 transition-colors">
+                        <span class="text-secondary font-bold text-lg">01</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Mengukur Tubuh</h3>
+                    <p class="text-gray-400 text-sm">Teknik pengukuran tubuh pelanggan secara akurat untuk hasil yang pas.</p>
+                </div>
+
+                <!-- Materi 2 -->
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group fade-in" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary/30 transition-colors">
+                        <span class="text-secondary font-bold text-lg">02</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Desain Busana</h3>
+                    <p class="text-gray-400 text-sm">Membuat desain busana kreatif sesuai tren dan kebutuhan pasar.</p>
+                </div>
+
+                <!-- Materi 3 -->
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group fade-in" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary/30 transition-colors">
+                        <span class="text-secondary font-bold text-lg">03</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Membuat Pola</h3>
+                    <p class="text-gray-400 text-sm">Teknik pembuatan pola baju yang presisi dan profesional.</p>
+                </div>
+
+                <!-- Materi 4 -->
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group fade-in" style="transition-delay: 300ms;">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary/30 transition-colors">
+                        <span class="text-secondary font-bold text-lg">04</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Cutting</h3>
+                    <p class="text-gray-400 text-sm">Memotong bahan dengan teknik yang benar dan efisien.</p>
+                </div>
+
+                <!-- Materi 5 -->
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group fade-in">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary/30 transition-colors">
+                        <span class="text-secondary font-bold text-lg">05</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Sewing</h3>
+                    <p class="text-gray-400 text-sm">Menjahit dengan mesin secara profesional dan rapi.</p>
+                </div>
+
+                <!-- Materi 6 -->
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group fade-in" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary/30 transition-colors">
+                        <span class="text-secondary font-bold text-lg">06</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Pressing</h3>
+                    <p class="text-gray-400 text-sm">Melakukan pengepresan untuk hasil akhir yang sempurna.</p>
+                </div>
+
+                <!-- Materi 7 -->
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group fade-in" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary/30 transition-colors">
+                        <span class="text-secondary font-bold text-lg">07</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Finishing</h3>
+                    <p class="text-gray-400 text-sm">Penyelesaian busana dengan detail yang rapi dan berkualitas.</p>
+                </div>
+
+                <!-- Materi 8 -->
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-all group fade-in" style="transition-delay: 300ms;">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mb-4 group-hover:bg-secondary/30 transition-colors">
+                        <span class="text-secondary font-bold text-lg">08</span>
+                    </div>
+                    <h3 class="text-white font-bold text-lg mb-2">Packing Product</h3>
+                    <p class="text-gray-400 text-sm">Pengeemasan produk siap jual dengan standar profesional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biaya Section -->
+    <section id="biaya" class="py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <div class="inline-block bg-secondary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">BIAYA & KEGIATAN</div>
+                <h2 class="text-3xl md:text-5xl font-bold text-primary">Investasi <span class="text-secondary">Terbaik</span></h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Biaya kursus yang terjangkau dengan benefit maksimal untuk masa depan Anda.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Pricing Card -->
+                <div class="bg-gradient-to-br from-primary to-accent rounded-3xl p-8 md:p-10 text-white relative overflow-hidden fade-in">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-secondary/20 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <div class="relative">
+                        <div class="inline-block bg-secondary text-primary px-4 py-1 rounded-full text-xs font-bold mb-6">PAKET LENGKAP</div>
+                        <h3 class="text-2xl font-bold mb-2">Kursus Menjahit</h3>
+                        <p class="text-gray-300 text-sm mb-6">Termasuk paket project pakaian</p>
+                        
+                        <div class="mb-8">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-sm text-gray-300">Rp</span>
+                                <span class="text-5xl md:text-6xl font-bold text-secondary">700.000</span>
+                            </div>
+                            <p class="text-gray-300 text-sm mt-2">/ 1 project pakaian</p>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Durasi belajar 1 s.d 2 Bulan</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Seminggu masuk 1-2x Pertemuan</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Sertifikat Pelatihan Resmi</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-4 h-4 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-sm">Project pakaian bisa dibawa pulang</span>
+                            </div>
+                        </div>
+
+                        <a href="#kontak" class="block w-full bg-secondary text-primary text-center py-4 rounded-xl font-bold hover:bg-yellow-400 transition-all transform hover:scale-105">
+                            Daftar Sekarang
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Benefits Card -->
+                <div class="bg-gray-50 rounded-3xl p-8 md:p-10 fade-in" style="transition-delay: 200ms;">
+                    <div class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-xs font-bold mb-6">BENEFIT</div>
+                    <h3 class="text-2xl font-bold text-primary mb-2">Yang Anda Dapatkan</h3>
+                    <p class="text-gray-500 text-sm mb-8">Keuntungan mengikuti kursus di lembaga kami</p>
+
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0 pulse-gold">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Sertifikat Pelatihan</h4>
+                                <p class="text-gray-600 text-sm mt-1">Sertifikat resmi yang diakui sebagai bukti kompetensi menjahit profesional.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0 pulse-gold">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Project Pakaian</h4>
+                                <p class="text-gray-600 text-sm mt-1">Membuat project pakaian nyata yang hasilnya boleh dibawa pulang.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0 pulse-gold">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Lulusan Siap Kerja</h4>
+                                <p class="text-gray-600 text-sm mt-1">Skill yang dipelajari langsung applicable di industri fashion dan konveksi.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 bg-secondary rounded-xl flex items-center justify-center flex-shrink-0 pulse-gold">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-primary">Fleksibilitas Waktu</h4>
+                                <p class="text-gray-600 text-sm mt-1">Jadwal yang dapat disesuaikan dengan aktivitas harian Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 md:py-28 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <div class="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">GALERI</div>
+                <h2 class="text-3xl md:text-5xl font-bold text-primary">Suasana <span class="text-secondary">Belajar</span></h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Lihat langsung bagaimana proses pembelajaran di lembaga kami.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 relative group overflow-hidden rounded-3xl fade-in">
+                    <img src="img/foto-1.png" alt="Kelas Menjahit" class="w-full h-80 md:h-[450px] object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                        <div class="text-white">
+                            <h3 class="text-xl font-bold">Kelas Praktik</h3>
+                            <p class="text-sm text-gray-200">Belajar langsung dengan mesin jahit profesional</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <div class="relative group overflow-hidden rounded-3xl fade-in">
+                        <img src="https://image.qwenlm.ai/public_source/fa6da749-83e6-4f21-94de-91d06ceaaf45/1e40b006c-31f5-4a72-b768-5c3ed9bf2eb9.png" alt="Proses Menjahit" class="w-full h-[210px] object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <div class="text-white">
+                                <h3 class="font-bold">Detail Jahitan</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group overflow-hidden rounded-3xl fade-in">
+                        <img src="https://image.qwenlm.ai/public_source/fa6da749-83e6-4f21-94de-91d06ceaaf45/1c62987ce-33e4-4bf5-8d69-6d2d0cf52cc1.png" alt="Desain Busana" class="w-full h-[210px] object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <div class="text-white">
+                                <h3 class="font-bold">Desain & Pola</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 md:py-28 bg-gradient-to-br from-secondary via-yellow-400 to-yellow-500 relative overflow-hidden">
+        <div class="absolute inset-0 dot-pattern opacity-20"></div>
+        <div class="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 right-10 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
+            <div class="inline-block bg-white/20 backdrop-blur-sm text-primary px-4 py-2 rounded-full text-sm font-bold mb-6">🎯 MULAI PERJALANAN ANDA</div>
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-primary mb-6 leading-tight">
+                Siap Menjadi Penjahit Profesional?
+            </h2>
+            <p class="text-primary/80 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                Bergabunglah dengan ratusan alumni kami yang telah sukses membangun karir di industri fashion. Daftar sekarang dan raih masa depan cerah Anda!
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://wa.me/6285711792327" target="_blank" class="bg-primary text-white px-8 py-4 rounded-full font-bold hover:bg-accent transition-all transform hover:scale-105 shadow-xl flex items-center gap-3">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Hubungi via WhatsApp
+                </a>
+                <a href="#kontak" class="bg-white text-primary px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl">
+                    Lihat Kontak
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontak" class="py-20 md:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <div class="inline-block bg-secondary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">HUBUNGI KAMI</div>
+                <h2 class="text-3xl md:text-5xl font-bold text-primary">Informasi <span class="text-secondary">Kontak</span></h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Jangan ragu untuk menghubungi kami jika ada pertanyaan seputar kursus menjahit.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Phone -->
+                <div class="bg-gradient-to-br from-primary to-accent rounded-3xl p-8 text-white text-center card-hover fade-in">
+                    <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Telepon / WhatsApp</h3>
+                    <div class="space-y-2">
+                        <a href="tel:08558967841" class="block text-lg font-semibold hover:text-secondary transition-colors">0855-8967-841</a>
+                        <a href="tel:085711792327" class="block text-lg font-semibold hover:text-secondary transition-colors">0857-1179-2327</a>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-4">Contact Person: Mulyana</p>
+                </div>
+
+                <!-- Address -->
+                <div class="bg-gray-50 rounded-3xl p-8 text-center card-hover border border-gray-100 fade-in" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 bg-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Alamat</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Cijambu, Desa Cisalada,<br>
+                        Kec. Cigombong Kab. Bogor,<br>
+                        Kode Pos: 16110
+                    </p>
+                </div>
+
+                <!-- Schedule -->
+                <div class="bg-gray-50 rounded-3xl p-8 text-center card-hover border border-gray-100 fade-in" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 bg-secondary/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-secondary" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4">Jadwal Belajar</h3>
+                    <div class="space-y-2 text-gray-600">
+                        <p class="font-semibold">Durasi: 1 - 2 Bulan</p>
+                        <p>Frekuensi: 1-2x per minggu</p>
+                        <p class="text-sm text-gray-500 mt-4">Jadwal fleksibel sesuai kesepakatan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+                            <svg class="w-7 h-7 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-bold text-lg">Riawan Marzuq Barokah</div>
+                            <div class="text-secondary text-sm">Lembaga Pelatihan Kerja</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-md">
+                        Lembaga Pelatihan Kerja Kejuruan Menjahit yang berkomitmen menghasilkan lulusan siap kerja dengan keterampilan menjahit dan desain mode tata busana profesional.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-secondary">Menu</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#beranda" class="hover:text-white transition-colors">Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-white transition-colors">Tentang</a></li>
+                        <li><a href="#keunggulan" class="hover:text-white transition-colors">Keunggulan</a></li>
+                        <li><a href="#materi" class="hover:text-white transition-colors">Materi</a></li>
+                        <li><a href="#biaya" class="hover:text-white transition-colors">Biaya</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-secondary">Kontak</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>📞 0855-8967-841</li>
+                        <li>📞 0857-1179-2327</li>
+                        <li> Cijambu, Cisalada, Cigombong, Bogor</li>
+                        <li>📮 Kode Pos: 16110</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2026 Riawan Marzuq Barokah. All rights reserved.</p>
+                <p class="text-gray-500 text-sm">Kursus Menjahit Profesional — Desain Mode Tata Busana</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6285711792327" target="_blank" class="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all transform hover:scale-110 pulse-gold">
+        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-primary/95', 'nav-blur', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-primary/95', 'nav-blur', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
